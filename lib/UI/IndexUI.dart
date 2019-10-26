@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Widget/LoginWidget.dart';
 ///////////////////////////////////////////////////////////////////////////////
 class indexUI extends StatefulWidget {
   indexUI({Key key, this.title}) : super(key: key);
@@ -25,8 +26,11 @@ class _indexUIState extends State<indexUI> {
     return Center(
       child: ListView(
           children: <Widget>[
+            LoginWidget(onLogine: (email,password){
+
+            },
+            )
           ]),
     );
   }
-
 }
