@@ -44,7 +44,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder( borderSide: BorderSide( color: Theme.of(context).accentColor, width: 1.0 ) ),
                 focusedBorder: UnderlineInputBorder( borderSide: BorderSide( color: Theme.of(context).accentColor, width: 1.0 ) ),
-                prefixIcon: const Icon( Icons.email, color: Colors.blue, ),
+                prefixIcon: const Icon( Icons.perm_identity, color: Colors.blue, ),
                 labelText: 'E-Mail',
               ),
               obscureText: false,

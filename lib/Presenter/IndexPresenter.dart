@@ -1,11 +1,12 @@
 import '../Data/userModel.dart' as userModel;
 
-bool signUpEmail({String p_email,String p_password}){
-  userModel.addUser(userModel.UserModel(email: p_email,password: p_password));
-  print("email: ${p_email} => password: ${p_password}");
-  return true;
+bool signUpEmail({String pEmail,String pPassword}){
+  return userModel.addUser(pUser: userModel.UserModel(email: pEmail,password: pPassword));
 }
 
-bool signInEmail(String p_email,String p_password){
-
+bool signInEmail({String pEmail,String pPassword}){
+  var u =userModel.getByEmail(pEmail: pEmail);
+  if(u==null)return false;
+  else if(u.password == pPassword) return true;
+  else return false;
 }

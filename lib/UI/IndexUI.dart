@@ -29,11 +29,17 @@ class _indexUIState extends State<indexUI> {
      child:ListView(
        children: <Widget>[
          SignInWidget( onSignIn:(email,password){
-           print("${email}  ${password}");
+          if(Presenter.signInEmail(pEmail: email,pPassword: password)) {
+            print("Ok SignIn");
+          }else{
+            print("Error SignIn");
+          }
          }),
          SignUpWidget( onSignUp:(email,password){
-           if(Presenter.signUpEmail(p_email: email,p_password: password)) {
+           if(Presenter.signUpEmail(pEmail: email,pPassword: password)) {
              print("Ok SignUp");
+           }else{
+             print("Error SignUp");
            }
          }),
      ],)
