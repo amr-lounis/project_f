@@ -31,7 +31,7 @@ UserModel getByEmail({String pEmail}) {
 }
 
 bool addUser({UserModel pUser}) {
-  HttpService.
+
   bool canAdd = true;
   _users.forEach((v){ if(v.email==pUser.email)canAdd=false; });
   if(canAdd == true) {

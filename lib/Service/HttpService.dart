@@ -12,6 +12,7 @@ sendRequest({String url,Map map,Function function})async{
   }catch( e ){ print(e.toString()); }
   function(response);
 }
+
 getIntValueFromJsonString(String p_string_input,String p_key){
   try{
     final Map<String,dynamic> responseData = convert.jsonDecode(p_string_input);
