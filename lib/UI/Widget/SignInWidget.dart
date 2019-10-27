@@ -12,15 +12,17 @@ class _SignInWidgetState extends State<SignInWidget> {
   String password;
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
+  Widget build(BuildContext cntxt) {
+    return Container (
+      margin: EdgeInsets.all(10),
+      child: GestureDetector(
       onTap: (){
-        FocusScope.of(context).requestFocus(FocusNode());
+        FocusScope.of(cntxt).requestFocus(FocusNode());
       },
       child: Container(
         child: Form(
           key: _formKey,
-          child: ListView(
+          child: Column(
               children: <Widget>[
                 _buildEmailTextField(),
                 _buildPasswordTextField(),
@@ -28,37 +30,60 @@ class _SignInWidgetState extends State<SignInWidget> {
               ]),
         ),
       ),
-    );
+    ),);
   }
   ////////////////////////////////////////////////////////////////////////////////
   Widget _buildEmailTextField() {
-    return TextFormField(
-      decoration: InputDecoration(
-          labelText: 'E-Mail', filled: true, fillColor: Colors.white),
-      keyboardType: TextInputType.emailAddress,
-      validator: (String value) {
-        if (value.isEmpty ) {
-          return 'Please enter a valid email';
-        }else return null;
-      },
-      onSaved: (String value) {
-        email = value;
-      },
+    return Container(
+        child: Padding(
+        padding: EdgeInsets.only(),
+            child: TextFormField(
+              style: TextStyle(color: Theme .of(context) .accentColor),
+              decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder( borderSide: BorderSide( color: Theme.of(context).accentColor, width: 1.0 ) ),
+                focusedBorder: UnderlineInputBorder( borderSide: BorderSide( color: Theme.of(context).accentColor, width: 1.0 ) ),
+                prefixIcon: const Icon( Icons.email, color: Colors.blue, ),
+                labelText: 'E-Mail',
+              ),
+              obscureText: false,
+              keyboardType: TextInputType.emailAddress,
+              validator: (String value) {
+                if (value.isEmpty ) {
+                  return 'Invalid email';
+                }else return null;
+              },
+              onSaved: (String value) {
+                email = value;
+              },
+            )
+      )
     );
   }
   //////////////////////////////////////////////////////////////////////////////
   Widget _buildPasswordTextField() {
-    return TextFormField(
-      decoration: InputDecoration( labelText: 'Password', filled: true, fillColor: Colors.white),
-      obscureText: true,
-      validator: (String value) {
-        if (value.isEmpty || value.length < 6) {
-          return 'Password invalid';
-        }else return null;
-      },
-      onSaved: (String value) {
-        password = value;
-      },
+    return Container(
+        child: Padding(
+            padding: EdgeInsets.only(),
+            child: TextFormField(
+              style: TextStyle(color: Theme .of(context) .accentColor),
+              decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder( borderSide: BorderSide( color: Theme.of(context).accentColor, width: 1.0 ) ),
+                focusedBorder: UnderlineInputBorder( borderSide: BorderSide( color: Theme.of(context).accentColor, width: 1.0 ) ),
+                prefixIcon: const Icon( Icons.lock, color: Colors.blue, ),
+                labelText: 'Password',
+              ),
+              obscureText: true,
+              keyboardType: TextInputType.text,
+              validator: (String value) {
+                if (value.isEmpty ) {
+                  return 'Invalid Password';
+                }else return null;
+              },
+              onSaved: (String value) {
+                password = value;
+              },
+            )
+        )
     );
   }
 ////////////////////////////////////////////////////////////////////////////////
