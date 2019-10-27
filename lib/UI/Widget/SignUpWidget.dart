@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 ///////////////////////////////////////////////////////////////////////////////
 class SignUpWidget extends StatefulWidget {
-  final Function onSignUp;
+  final Function(String ,String ) onSignUp;
   SignUpWidget({this.onSignUp});
   @override
   createState() => _SignUpWidgetState();
 }
 class _SignUpWidgetState extends State<SignUpWidget> {
-  Map<String, dynamic> _formData = {
-    'email': null,
-    'password': null
-  };
-  GlobalKey<FormState> _formKey = new GlobalKey();
+  final GlobalKey<FormState> _formKey = new GlobalKey();
+  final TextEditingController _passwordTextController = TextEditingController();
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -41,10 +41,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       validator: (String value) {
         if (value.isEmpty ) {
           return 'Please enter a valid email';
-        }
+        }else return null;
       },
       onSaved: (String value) {
-        _formData['email'] = value;
+        email = value;
       },
     );
   }
@@ -52,49 +52,40 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   Widget _buildPasswordTextField() {
     return TextFormField(
       controller: _passwordTextController,
-      decoration: InputDecoration(
-          labelText: 'Password', filled: true, fillColor: Colors.white),
+      decoration: InputDecoration( labelText: 'Password', filled: true, fillColor: Colors.white),
       obscureText: true,
       validator: (String value) {
         if (value.isEmpty || value.length < 6) {
           return 'Password invalid';
-        }
+        }else return null;
       },
       onSaved: (String value) {
-        _formData['password'] = value;
+        password = value;
       },
     );
   }
-  ////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
   Widget _buildPasswordConfirmTextField() {
-    return FadeTransition(
-      child: SlideTransition(
-        child: TextFormField(
-          decoration: InputDecoration(
-              labelText: 'Confirm Password',
-              filled: true,
-              fillColor: Colors.white),
-          obscureText: true,
-          validator: (String value) {
-            if (_passwordTextController.text != value ) {
-              return 'Passwords do not match.';
-            }
-          },
-        ),
-      ),
+    return TextFormField(
+      decoration: InputDecoration( labelText: 'Confirm Password', filled: true, fillColor: Colors.white),
+      obscureText: true,
+      validator: (String value) {
+        if (_passwordTextController.text != value ) {
+          return 'Passwords do not match.';
+        }else return null;
+      },
     );
   }
 ////////////////////////////////////////////////////////////////////////////////
   Widget _buildLoginRaisedButton() {
     return RaisedButton(
-      child: Text("Ok"),
+      child: Text("Sign up"),
       onPressed: (){
         if(!_formKey.currentState.validate())return;
         _formKey.currentState.save();
-        widget.onSignUp(_formData['email'],_formData['password']);
+        widget.onSignUp(email,password);
       },
     );
   }
 ////////////////////////////////////////////////////////////////////////////////
-  final TextEditingController _passwordTextController = TextEditingController();
 }

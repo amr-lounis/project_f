@@ -25,12 +25,10 @@ class _indexUIState extends State<indexUI> {
   //*************************************************
   widgetBody() {
     return Center(
-//     child: SignInWidget( onSignIn:(email,password){
-//       print("${email}  ${password}");
-//     })
-    child: SignUpWidget(onSignUp: (email,password){
-      print("${email}  ${password}");
-    },),
+     child:
+       SignUpWidget( onSignUp:(email,password){
+         print("${email}  ${password}");
+       })
     );
   }
 }

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 ///////////////////////////////////////////////////////////////////////////////
 class SignInWidget extends StatefulWidget {
-  final Function onSignIn;
+  final Function(String ,String ) onSignIn;
   SignInWidget({this.onSignIn});
   @override
   createState() => _SignInWidgetState();
 }
 class _SignInWidgetState extends State<SignInWidget> {
-  GlobalKey<FormState> _formKey = new GlobalKey();
+  final GlobalKey<FormState> _formKey = new GlobalKey();
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -36,7 +39,7 @@ class _SignInWidgetState extends State<SignInWidget> {
       validator: (String value) {
         if (value.isEmpty ) {
           return 'Please enter a valid email';
-        }
+        }else return null;
       },
       onSaved: (String value) {
         email = value;
@@ -46,13 +49,12 @@ class _SignInWidgetState extends State<SignInWidget> {
   //////////////////////////////////////////////////////////////////////////////
   Widget _buildPasswordTextField() {
     return TextFormField(
-      decoration: InputDecoration(
-          labelText: 'Password', filled: true, fillColor: Colors.white),
+      decoration: InputDecoration( labelText: 'Password', filled: true, fillColor: Colors.white),
       obscureText: true,
       validator: (String value) {
         if (value.isEmpty || value.length < 6) {
           return 'Password invalid';
-        }
+        }else return null;
       },
       onSaved: (String value) {
         password = value;
@@ -62,7 +64,7 @@ class _SignInWidgetState extends State<SignInWidget> {
 ////////////////////////////////////////////////////////////////////////////////
   Widget _buildLoginRaisedButton() {
     return RaisedButton(
-      child: Text("Ok"),
+      child: Text("Sign in"),
       onPressed: (){
         if(!_formKey.currentState.validate())return;
         _formKey.currentState.save();
@@ -70,6 +72,5 @@ class _SignInWidgetState extends State<SignInWidget> {
       },
     );
   }
-  String email;
-  String password;
+////////////////////////////////////////////////////////////////////////////////
 }
