@@ -67,6 +67,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         child: Padding(
             padding: EdgeInsets.only(),
             child: TextFormField(
+              controller: _passwordTextController,
               style: TextStyle(color: Theme .of(context) .accentColor),
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder( borderSide: BorderSide( color: Theme.of(context).accentColor, width: 1.0 ) ),
@@ -99,12 +100,12 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 enabledBorder: UnderlineInputBorder( borderSide: BorderSide( color: Theme.of(context).accentColor, width: 1.0 ) ),
                 focusedBorder: UnderlineInputBorder( borderSide: BorderSide( color: Theme.of(context).accentColor, width: 1.0 ) ),
                 prefixIcon: const Icon( Icons.lock, color: Colors.blue, ),
-                labelText: 'Password',
+                labelText: 'Password Confirm',
               ),
               obscureText: true,
               keyboardType: TextInputType.text,
               validator: (String value) {
-                  if (value.isEmpty  || _passwordTextController.text != value ) {
+                  if (value.isEmpty || _passwordTextController.text != value ) {
                     return 'Passwords do not match.';
                   }else return null;
                 },

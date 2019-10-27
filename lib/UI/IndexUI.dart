@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Widget/SignInWidget.dart';
 import 'Widget/SignUpWidget.dart';
+import '../Presenter/IndexPresenter.dart' as Presenter;
 ///////////////////////////////////////////////////////////////////////////////
 class indexUI extends StatefulWidget {
   indexUI({Key key, this.title}) : super(key: key);
@@ -31,7 +32,9 @@ class _indexUIState extends State<indexUI> {
            print("${email}  ${password}");
          }),
          SignUpWidget( onSignUp:(email,password){
-           print("${email}  ${password}");
+           if(Presenter.signUpEmail(p_email: email,p_password: password)) {
+             print("Ok SignUp");
+           }
          }),
      ],)
     );
