@@ -1,4 +1,5 @@
 class UserModel{
+  int id;
   String name;
   String email;
   String phone;
@@ -31,6 +32,7 @@ bool addUser({UserModel pUser}) {
   bool canAdd = true;
   _users.forEach((v){ if(v.email==pUser.email)canAdd=false; });
   if(canAdd == true) {
+    pUser.id = _users.length;
     _users.add(pUser);
     return true;
   }else{
@@ -38,10 +40,10 @@ bool addUser({UserModel pUser}) {
   }
 }
 
-void updateUser(int p_id, UserModel p_user) {
-  _users[p_id] = p_user;
+void updateUser(int pId, UserModel pUser) {
+  _users[pId] = pUser;
 }
 
-void deleteUser(int p_id) {
-  _users.removeAt(p_id);
+void deleteUser(int pId) {
+  _users.removeAt(pId);
 }
