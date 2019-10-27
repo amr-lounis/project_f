@@ -1,7 +1,7 @@
 import '../Data/userModel.dart' as userModel;
 
-bool signUpEmail({String pEmail,String pPassword}){
-  return userModel.addUser(pUser: userModel.UserModel(email: pEmail,password: pPassword));
+Future<bool> signUpEmail({String pEmail,String pPassword})async{
+  return await userModel.addUser(pUser: userModel.UserModel(email: pEmail,password: pPassword));
 }
 
 bool signInEmail({String pEmail,String pPassword}){

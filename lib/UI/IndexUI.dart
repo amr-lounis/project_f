@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Widget/SignInWidget.dart';
 import 'Widget/SignUpWidget.dart';
+import 'Tool/DialogTool.dart' as DialogTool;
 import '../Presenter/IndexPresenter.dart' as Presenter;
 ///////////////////////////////////////////////////////////////////////////////
 class indexUI extends StatefulWidget {
@@ -25,7 +26,7 @@ class _indexUIState extends State<indexUI> {
   }
   //*************************************************
   widgetBody() {
-    return Center(
+    return _progressBarActive == true ? Center(child: CircularProgressIndicator()):Center(
      child:ListView(
        children: <Widget>[
          SignInWidget( onSignIn:(email,password){
@@ -35,14 +36,25 @@ class _indexUIState extends State<indexUI> {
             print("Error SignIn");
           }
          }),
-         SignUpWidget( onSignUp:(email,password){
-           if(Presenter.signUpEmail(pEmail: email,pPassword: password)) {
+         SignUpWidget( onSignUp:(email,password)async{
+           setState(() {
+             _progressBarActive = true;
+             print("000000000000000000000000000000000000000000000000000000000000000000000000");
+           });
+           if(await Presenter.signUpEmail(pEmail: email,pPassword: password)) {
              print("Ok SignUp");
            }else{
              print("Error SignUp");
            }
+           DialogTool._showMaterialDialog();
+           setState(() {
+             _progressBarActive = false;
+             print("111111111111111111111111111111111111111111111111111111111111111111111111");
+           });
          }),
      ],)
     );
   }
+  //////////////////////////////////////////////////////////////////////////////
+  bool _progressBarActive = false;
 }

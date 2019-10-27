@@ -30,7 +30,7 @@ UserModel getByEmail({String pEmail}) {
   return u;
 }
 
-bool addUser({UserModel pUser}) {
+Future<bool> addUser({UserModel pUser}) async{
   //String url = "http://192.168.1.199:8080";
   String url = "https://flutter-tutorial-13bae.firebaseio.com/user.json";
   Map<String ,dynamic> u= {
@@ -40,7 +40,7 @@ bool addUser({UserModel pUser}) {
     "phone":"${pUser.phone}",
     "password":"${pUser.password}",
   };
-  sendRequest(url: url,map: u,onReceive: (r){
+  await sendRequest(url: url,map: u,onReceive: (r){
     print(r);
     return ;
   }
