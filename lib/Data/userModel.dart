@@ -17,7 +17,8 @@ UserModel getById({int pId}) {
   if(_users.length == 0)addUser(pUser: UserModel(email: "admin",password: "admin"));
   return _users[pId];
 }
-UserModel getByEmail({String pEmail}) {
+ getByEmail({String pEmail}) async {
+  await Future.delayed(Duration(seconds: 3), () => print('process getByEmail'));
   if(_users.length == 0)addUser(pUser: UserModel(email: "admin",password: "admin"));
   var u;
   _users.forEach((v){
@@ -30,7 +31,7 @@ UserModel getByEmail({String pEmail}) {
   return u;
 }
 
-Future<bool> addUser({UserModel pUser}) async{
+ addUser({UserModel pUser}) async{
   //String url = "http://192.168.1.199:8080";
   String url = "https://flutter-tutorial-13bae.firebaseio.com/user.json";
   Map<String ,dynamic> u= {

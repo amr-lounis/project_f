@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'Widget/SignInWidget.dart';
 import 'Widget/SignUpWidget.dart';
@@ -29,27 +30,30 @@ class _indexUIState extends State<indexUI> {
     return _progressBarActive == true ? Center(child: CircularProgressIndicator()):Center(
      child:ListView(
        children: <Widget>[
-         SignInWidget( onSignIn:(email,password){
-          if(Presenter.signInEmail(pEmail: email,pPassword: password)) {
+         SignInWidget( onSignIn:(email,password)async{
+           setState(() {
+             _progressBarActive = true;
+           });
+          if(await Presenter.signInEmail(pEmail: email,pPassword: password)) {
             print("Ok SignIn");
           }else{
-            print("Error SignIn");
+            DialogTool.showMaterialDialog(pContext: context,pTitle: 'Error',pContent: "Error SignIn");
           }
+           setState(() {
+             _progressBarActive = false;
+           });
          }),
          SignUpWidget( onSignUp:(email,password)async{
            setState(() {
              _progressBarActive = true;
-             print("000000000000000000000000000000000000000000000000000000000000000000000000");
            });
            if(await Presenter.signUpEmail(pEmail: email,pPassword: password)) {
              print("Ok SignUp");
            }else{
-             print("Error SignUp");
+             DialogTool.showMaterialDialog(pContext: context,pTitle: 'Error',pContent: "Error SignUp");
            }
-           DialogTool._showMaterialDialog();
            setState(() {
              _progressBarActive = false;
-             print("111111111111111111111111111111111111111111111111111111111111111111111111");
            });
          }),
      ],)
