@@ -1,4 +1,4 @@
-import '../Service/HttpService.dart' as HttpService;
+import '../Service/HttpService.dart';
 
 class UserModel{
   int id;
@@ -31,6 +31,20 @@ UserModel getByEmail({String pEmail}) {
 }
 
 bool addUser({UserModel pUser}) {
+  //String url = "http://192.168.1.199:8080";
+  String url = "https://flutter-tutorial-13bae.firebaseio.com/user.json";
+  Map<String ,dynamic> u= {
+    "id":"${pUser.id}",
+    "name":"${pUser.name}",
+    "email":"${pUser.email}",
+    "phone":"${pUser.phone}",
+    "password":"${pUser.password}",
+  };
+  sendRequest(url: url,map: u,onReceive: (r){
+    print(r);
+    return ;
+  }
+  );
 
   bool canAdd = true;
   _users.forEach((v){ if(v.email==pUser.email)canAdd=false; });

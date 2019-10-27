@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-sendRequest({String url,Map map,Function function})async{
+// ignore: non_constant_identifier_names
+sendRequest({String url,Map map,Function onReceive(String)})async{
   String response = "";
   try {
     final duration = const Duration(seconds: 10);
@@ -10,7 +11,7 @@ sendRequest({String url,Map map,Function function})async{
     if (request.statusCode == 200) { response = request.body.toString(); }
     else { print("Request failed with status code: ${request.statusCode}."); }
   }catch( e ){ print(e.toString()); }
-  function(response);
+  onReceive(response);
 }
 
 getIntValueFromJsonString(String p_string_input,String p_key){
