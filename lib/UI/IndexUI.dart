@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'Widget/SignInWidget.dart';
 import 'Widget/SignUpWidget.dart';
-import 'Tool/DialogTool.dart' as DialogTool;
+import 'Tool/MessageShowTool.dart' as MessageShowTool;
 import '../Presenter/IndexPresenter.dart' as Presenter;
 ///////////////////////////////////////////////////////////////////////////////
 class indexUI extends StatefulWidget {
@@ -15,6 +15,7 @@ class _indexUIState extends State<indexUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: MessageShowTool.scaffoldKey,
       appBar: widgetAppBar(),
       body: widgetBody(),
     );
@@ -30,30 +31,34 @@ class _indexUIState extends State<indexUI> {
     return _progressBarActive == true ? Center(child: CircularProgressIndicator()):Center(
      child:ListView(
        children: <Widget>[
-         SignInWidget( onSignIn:(email,password)async{
+         SignInWidget( onSignIn:(email,password){
            setState(() {
              _progressBarActive = true;
            });
-          if(await Presenter.signInEmail(pEmail: email,pPassword: password)) {
-            print("Ok SignIn");
-          }else{
-            DialogTool.showMaterialDialog(pContext: context,pTitle: 'Error',pContent: "Error SignIn");
-          }
-           setState(() {
-             _progressBarActive = false;
+           Presenter.signInEmail(pEmail: email,pPassword: password).then((b){
+             if(b) {
+               MessageShowTool.showSnakeBar(pTitle: "SignIn Ok",pTime: 5);
+             }else{
+               MessageShowTool.showSnakeBar(pTitle: "SignIn Error",pTime: 5);
+             }
+             setState(() {
+               _progressBarActive = false;
+             });
            });
          }),
-         SignUpWidget( onSignUp:(email,password)async{
+         SignUpWidget( onSignUp:(email,password){
            setState(() {
              _progressBarActive = true;
            });
-           if(await Presenter.signUpEmail(pEmail: email,pPassword: password)) {
-             print("Ok SignUp");
-           }else{
-             DialogTool.showMaterialDialog(pContext: context,pTitle: 'Error',pContent: "Error SignUp");
-           }
-           setState(() {
-             _progressBarActive = false;
+           Presenter.signUpEmail(pEmail: email,pPassword: password).then((b){
+             if(b) {
+               MessageShowTool.showSnakeBar(pTitle: "SignUp Ok",pTime: 5);
+             }else{
+               MessageShowTool.showSnakeBar(pTitle: "SignUp Error",pTime: 5);
+             }
+             setState(() {
+               _progressBarActive = false;
+             });
            });
          }),
      ],)

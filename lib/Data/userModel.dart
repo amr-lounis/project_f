@@ -1,3 +1,5 @@
+import 'dart:async' as asyncc;
+
 import '../Service/HttpService.dart';
 
 class UserModel{
@@ -19,6 +21,7 @@ UserModel getById({int pId}) {
 }
  getByEmail({String pEmail}) async {
   await Future.delayed(Duration(seconds: 3), () => print('process getByEmail'));
+
   if(_users.length == 0)addUser(pUser: UserModel(email: "admin",password: "admin"));
   var u;
   _users.forEach((v){
@@ -41,11 +44,8 @@ UserModel getById({int pId}) {
     "phone":"${pUser.phone}",
     "password":"${pUser.password}",
   };
-  await sendRequest(url: url,map: u,onReceive: (r){
-    print(r);
-    return ;
-  }
-  );
+
+  var s = await sendRequest(url: url,map: u);
 
   bool canAdd = true;
   _users.forEach((v){ if(v.email==pUser.email)canAdd=false; });
