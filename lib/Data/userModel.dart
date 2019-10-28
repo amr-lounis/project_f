@@ -38,11 +38,11 @@ UserModel getById({int pId}) {
   //String url = "http://192.168.1.199:8080";
   String url = "https://flutter-tutorial-13bae.firebaseio.com/user.json";
   Map<String ,dynamic> u= {
-    "id":"${pUser.id}",
-    "name":"${pUser.name}",
-    "email":"${pUser.email}",
-    "phone":"${pUser.phone}",
-    "password":"${pUser.password}",
+    "id":pUser?.id??0,
+    "name":pUser?.name??"",
+    "email":pUser?.email??"",
+    "phone":pUser?.phone??"",
+    "password":pUser?.password??"",
   };
 
   var s = await sendRequest(url: url,map: u);
