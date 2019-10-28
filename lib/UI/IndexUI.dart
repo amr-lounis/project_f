@@ -45,7 +45,7 @@ class _indexUIState extends State<indexUI> {
   }
   //////////////////////////////////////////////////////////////////////////////
   void initListener(){
-    Presenter.ProgressBarSC.stream.listen((value){
+    Presenter.progressBarSC.stream.listen((value){
       setState(() {
         _boolProgressBar = value;
       });
