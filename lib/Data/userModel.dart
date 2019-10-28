@@ -31,17 +31,18 @@ String url = "https://flutter-tutorial-13bae.firebaseio.com/user.json";
         role : userMap['role'],
       );
       _users.add(u);
-    }
-    );
+    } );
    }catch(ee){print('************************************************************ Error getAll() ${ee.toString()}');}
   _users.forEach((u){
     print("{\n \t id:${u.id}\n \t name:${u.name}\n \t email:${u.email}\n \t phone:\n${u.phone} \t password:${u.password}\n\}");
   });
 }
 ///////////////////////////////////////////////////////////////////////////////
-UserModel getById({int pId}) {
-  if(_users.length == 0)addUser(pUser: UserModel(email: "admin",password: "admin"));
-  return _users[pId];
+ getById({String pId})async {
+  await getAll();
+  UserModel u;
+  _users.forEach((value){  if(value.id == pId){ u=value; } });
+  return u;
 }
 ///////////////////////////////////////////////////////////////////////////////
 signIn({String pEmail,String pPassword})async{
@@ -52,6 +53,9 @@ signIn({String pEmail,String pPassword})async{
 }
 ///////////////////////////////////////////////////////////////////////////////
  addUser({UserModel pUser})async {
+   await getAll();
+   if(isExist(pUser))return false;
+
   Map<String ,dynamic> u= {
     "id":pUser?.id??"",
     "name":pUser?.name??"",

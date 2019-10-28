@@ -5,13 +5,13 @@ import 'Widget/SignUpWidget.dart';
 import 'Widget/SnakeBarShow.dart' as SnakeBarShow;
 import '../Presenter/IndexPresenter.dart' as Presenter;
 ///////////////////////////////////////////////////////////////////////////////
-class indexUI extends StatefulWidget {
-  indexUI({Key key, this.title}) : super(key: key);
+class IndexUI extends StatefulWidget {
+  IndexUI({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  createState() => _indexUIState();
+  createState() => _IndexUIState();
 }
-class _indexUIState extends State<indexUI> {
+class _IndexUIState extends State<IndexUI> {
   //////////////////////////////////////////////////////////////////////////////
   @override
   initState() {

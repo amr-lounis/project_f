@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Project',
       theme: ThemeData(),
-      home: UI.indexUI(),
+      home: UI.IndexUI(),
     );
   }
 }
