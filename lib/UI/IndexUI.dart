@@ -14,29 +14,9 @@ class indexUI extends StatefulWidget {
 class _indexUIState extends State<indexUI> {
   //////////////////////////////////////////////////////////////////////////////
   @override
-  void initState() {
-
-    Presenter.ProgressBarSC.stream.listen((value){
-      setState(() {
-        _boolProgressBar = value;
-      });
-    });
-
-    Presenter.signInEmailSC.stream.listen((value){
-      if(value) {
-        SnakeBarShow.showSnakeBar(pTitle: "SignIn Ok",pTime: 5);
-      }else{
-        SnakeBarShow.showSnakeBar(pTitle: "SignIn Error",pTime: 5);
-      }
-    });
-
-    Presenter.signUpEmailSC.stream.listen((value){
-      if(value) {
-        SnakeBarShow.showSnakeBar(pTitle: "SignUp Ok",pTime: 5);
-      }else{
-        SnakeBarShow.showSnakeBar(pTitle: "SignUp Error",pTime: 5);
-      }
-    });
+  initState() {
+    initListener();
+    super.initState();
   }
   //////////////////////////////////////////////////////////////////////////////
   @override
@@ -64,5 +44,30 @@ class _indexUIState extends State<indexUI> {
     );
   }
   //////////////////////////////////////////////////////////////////////////////
+  void initListener(){
+    Presenter.ProgressBarSC.stream.listen((value){
+      setState(() {
+        _boolProgressBar = value;
+      });
+    });
+
+    Presenter.signInEmailSC.stream.listen((value){
+      if(value) {
+        SnakeBarShow.showSnakeBar(pTitle: "SignIn Ok",pTime: 5);
+      }else{
+        SnakeBarShow.showSnakeBar(pTitle: "SignIn Error",pTime: 5);
+      }
+    });
+
+    Presenter.signUpEmailSC.stream.listen((value){
+      if(value) {
+        SnakeBarShow.showSnakeBar(pTitle: "SignUp Ok",pTime: 5);
+      }else{
+        SnakeBarShow.showSnakeBar(pTitle: "SignUp Error",pTime: 5);
+      }
+    });
+  }
+  //////////////////////////////////////////////////////////////////////////////
   bool _boolProgressBar = false;
+  //////////////////////////////////////////////////////////////////////////////
 }
