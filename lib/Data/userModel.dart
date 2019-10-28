@@ -24,11 +24,7 @@ UserModel getById({int pId}) {
 
   if(_users.length == 0)addUser(pUser: UserModel(email: "admin",password: "admin"));
   var u;
-  _users.forEach((v){
-    if(v.email == pEmail){
-      u=v;
-      //print("${v.email} ${v.password}");
-    }
+  _users.forEach((value){  if(value.email == pEmail){ u=value; }
   }
   );
   return u;

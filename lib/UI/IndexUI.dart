@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'Widget/SignInWidget.dart';
 import 'Widget/SignUpWidget.dart';
-import 'Widget/MessageShowTool.dart' as MessageShowTool;
+import 'Widget/SnakeBarShow.dart' as SnakeBarShow;
 import '../Presenter/IndexPresenter.dart' as Presenter;
 ///////////////////////////////////////////////////////////////////////////////
 class indexUI extends StatefulWidget {
@@ -24,17 +24,17 @@ class _indexUIState extends State<indexUI> {
 
     Presenter.signInEmailSC.stream.listen((value){
       if(value) {
-        MessageShowTool.showSnakeBar(pTitle: "SignIn Ok",pTime: 5);
+        SnakeBarShow.showSnakeBar(pTitle: "SignIn Ok",pTime: 5);
       }else{
-        MessageShowTool.showSnakeBar(pTitle: "SignIn Error",pTime: 5);
+        SnakeBarShow.showSnakeBar(pTitle: "SignIn Error",pTime: 5);
       }
     });
 
     Presenter.signUpEmailSC.stream.listen((value){
       if(value) {
-        MessageShowTool.showSnakeBar(pTitle: "SignUp Ok",pTime: 5);
+        SnakeBarShow.showSnakeBar(pTitle: "SignUp Ok",pTime: 5);
       }else{
-        MessageShowTool.showSnakeBar(pTitle: "SignUp Error",pTime: 5);
+        SnakeBarShow.showSnakeBar(pTitle: "SignUp Error",pTime: 5);
       }
     });
   }
@@ -42,7 +42,7 @@ class _indexUIState extends State<indexUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: MessageShowTool.scaffoldKey,
+      key: SnakeBarShow.scaffoldKey,
       appBar: widgetAppBar(),
       body: widgetBody(),
     );
