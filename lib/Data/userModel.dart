@@ -34,7 +34,7 @@ UserModel getById({int pId}) {
   return u;
 }
 
- addUser({UserModel pUser}) async{
+ addUser({UserModel pUser})async {
   //String url = "http://192.168.1.199:8080";
   String url = "https://flutter-tutorial-13bae.firebaseio.com/user.json";
   Map<String ,dynamic> u= {
@@ -46,7 +46,6 @@ UserModel getById({int pId}) {
   };
 
   var s = await sendRequest(url: url,map: u);
-
   bool canAdd = true;
   _users.forEach((v){ if(v.email==pUser.email)canAdd=false; });
   if(canAdd == true) {

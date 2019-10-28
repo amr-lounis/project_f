@@ -1,12 +1,26 @@
+import 'dart:async';
+
 import '../Data/userModel.dart' as userModel;
 
-Future<bool> signUpEmail({String pEmail,String pPassword})async{
-  return await userModel.addUser(pUser: userModel.UserModel(email: pEmail,password: pPassword));
+void signInEmail({String pEmail,String pPassword})async{
+  ProgressBarSC.sink.add(true);
+  var u = await userModel.getByEmail(pEmail: pEmail);
+  ProgressBarSC.sink.add(false);
+
+  var value = false;
+  if(u==null)value = false;
+  else if(u.password == pPassword) value = true;
+  else value = false;
+  signInEmailSC.sink.add(value);
 }
 
-Future<bool> signInEmail({String pEmail,String pPassword})async{
-  var u = await userModel.getByEmail(pEmail: pEmail);
-  if(u==null)return false;
-  else if(u.password == pPassword) return true;
-  else return false;
+void signUpEmail({String pEmail,String pPassword})async{
+  ProgressBarSC.sink.add(true);
+  var value=  await userModel.addUser(pUser: userModel.UserModel(email: pEmail,password: pPassword));
+  ProgressBarSC.sink.add(false);
+  signUpEmailSC.sink.add(value);
 }
+
+StreamController<bool> ProgressBarSC = StreamController();
+StreamController<bool> signInEmailSC = StreamController();
+StreamController<bool> signUpEmailSC = StreamController();
