@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-Future<String> sendRequest({String url,Map map})async{
+Future<String> sendRequest({String pUrl,String pBody})async{
   String response = "";
   try {
     final duration = const Duration(seconds: 10);
-    final request = map == null ? await http.get(url).timeout(duration): await http.post(url,body: convert.jsonEncode(map)).timeout(duration) ;
+    final request = pBody == null ? await http.get(pUrl).timeout(duration): await http.post(pUrl,body: pBody).timeout(duration) ;
     if (request.statusCode == 200) { response = request.body.toString(); }
-    else { print("Request failed with status code: ${request.statusCode}."); }
-  }catch( e ){ print(e.toString()); }
+    else { throw Exception ("Request failed with status code: ${request.statusCode}."); }
+  }catch( e ){ print(e.toString()); response = null;}
   return response;
 }
 

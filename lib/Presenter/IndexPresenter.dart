@@ -4,13 +4,8 @@ import '../Data/userModel.dart' as userModel;
 
 void signInEmail({String pEmail,String pPassword})async{
   ProgressBarSC.sink.add(true);
-  var u = await userModel.getByEmail(pEmail: pEmail);
+  var value = await userModel.signIn(pEmail: pEmail,pPassword: pPassword);
   ProgressBarSC.sink.add(false);
-
-  var value = false;
-  if(u==null)value = false;
-  else if(u.password == pPassword) value = true;
-  else value = false;
   signInEmailSC.sink.add(value);
 }
 
