@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
-////////////////////////////////////////////////////////////////////////////////
 Future<String> post({String pUrl,String pBody})async{
   String response = "";
   try {
@@ -18,7 +17,7 @@ Future<String> put({String pUrl,String pBody})async{
   String response = "";
   try {
     final duration = const Duration(seconds: 10);
-    final request = await http.put(pUrl,body: pBody).timeout(duration) ;
+    final request = await http.post(pUrl,body: pBody).timeout(duration) ;
 
     if (request.statusCode == 200) { response = request.body.toString(); }
     else { throw Exception ("Request failed with status code: ${request.statusCode}."); }
@@ -49,4 +48,3 @@ Future<String> delete({String pUrl})async{
   }catch( e ){ print(e.toString()); response = null;}
   return response;
 }
-////////////////////////////////////////////////////////////////////////////////
