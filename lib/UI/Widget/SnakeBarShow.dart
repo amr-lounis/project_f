@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//////////////////////////////////////////////////////////////////////////////
 void showSnakeBar1({BuildContext pContext,String pTitle,int pTime = 1}){
   Scaffold.of(pContext).showSnackBar(
     SnackBar(
@@ -8,6 +8,7 @@ void showSnakeBar1({BuildContext pContext,String pTitle,int pTime = 1}){
     ),
   );
 }
+//////////////////////////////////////////////////////////////////////////////
 GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 void showSnakeBar({String pTitle,int pTime = 1}){
   var s=new SnackBar(
@@ -18,3 +19,4 @@ void showSnakeBar({String pTitle,int pTime = 1}){
   );
   scaffoldKey.currentState.showSnackBar(s);
 }
+//////////////////////////////////////////////////////////////////////////////
